@@ -11,6 +11,24 @@ PlacesVisited.prototype.addPlace = function(place){
 	this.places.push(place);
 }
 
+PlacesVisited.prototype.delete = function(id){
+	for (var i=0; i< this.places.length; i++) {
+    if (this.places[i]) {
+      if (this.places[i].id == id) {
+        delete this.places[i];
+        return true;
+      }
+    }
+  };
+  return false;
+}
+
+function deletebtn(placesVisited, id){
+	placesVisited.delete(id)
+	id = "#" + id;
+	$(id).popover('destroy');
+}
+
 function Place(location, landmark, timeOfYear, notes) {
 	this.location = location;
 	this.landmark =landmark;
@@ -29,11 +47,15 @@ $(document).ready(function(){
 
 		var place = new Place(location,landmark,time,notes)
 		placesVisited.addPlace(place)
-		placesVisited.places.forEach(function(visited){
-			$('#places').append(`<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="${visited.location}" data-html=true data-content="<p><strong>Landmark: </strong> ${visited.landmark} <br> <strong> Time of year: </strong>${visited.timeOfYear} <br> <strong>Notes: </strong>${visited.notes}</p>">${visited.location}</button>`)
+		$(".btn-danger").remove()
+		placesVisited.places.forEach(function(visited,i){
+			$('#places').append(`<a tabindex="${i}" id="${i}" type="button" class="btn btn-lg btn-danger" data-toggle="popover" data-trigger="focus" title="${visited.location}" data-html=true data-content="<p><strong>Landmark: </strong> ${visited.landmark} <br> <strong> Time of year: </strong>${visited.timeOfYear} <br> <strong>Notes: </strong>${visited.notes}</p>">${visited.location}</a>`)
 		})
 		$(function () {
 			$('[data-toggle="popover"]').popover()
+		})
+		$('.popover-dismiss').popover({
+			trigger: 'focus'
 		})
 	})
 });

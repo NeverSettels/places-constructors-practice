@@ -1,0 +1,13 @@
+button, a {
+    margin: 5px;
+    color: black;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fstatic01.nyt.com%2Fimages%2F2017%2F01%2F03%2Ftravel%2Fplaces-to-visit-1483468095725-LN%2Fplaces-to-visit-1483468095725-videoSixteenByNineJumbo1600-v11.jpg&f=1&nofb=1");
+    background-size:cover;
+}
+input[type="text"]{
+    background: rgba(255, 255, 255, 0.555);
+}
